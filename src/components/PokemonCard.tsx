@@ -1,6 +1,7 @@
-import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { FadeInImage } from './FadeInImage';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -9,11 +10,19 @@ interface Props {
 }
 
 export const PokemonCard = ({ pokemon }: Props) => {
+
+    const [bgColor, setBgColor] = useState('grey');
+
     return (
         <TouchableOpacity
             activeOpacity={0.9}
         >
-            <View style={styles.cardContainer}>
+            <View
+                style={{
+                    ...styles.cardContainer,
+                    backgroundColor: bgColor,
+                }}
+            >
 
                 {/* Nombre del pokemon y ID */}
                 <View>
@@ -22,6 +31,18 @@ export const PokemonCard = ({ pokemon }: Props) => {
                         {'\n#' + pokemon.id}
                     </Text>
                 </View>
+
+                <View style={styles.pokebolaContainer}>
+                    <Image
+                        source={require('../assets/pokebola-blanca.png')}
+                        style={styles.pokebola}
+                    />
+                </View>
+
+                <FadeInImage
+                    uri={pokemon.picture}
+                    style={styles.pokemonImage}
+                />
 
             </View>
         </TouchableOpacity>
@@ -46,6 +67,32 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         top: 20,
         left: 10,
+    },
+
+    pokebola: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+        bottom: -25,
+        right: -25,
+        opacity: 0.5,
+    },
+
+    pokemonImage: {
+        position: 'absolute',
+        width: 120,
+        height: 120,
+        right: -8,
+        bottom: -5,
+    },
+
+    pokebolaContainer: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+        right: 0,
+        bottom: 0,
+        overflow: 'hidden',
     },
 
 });

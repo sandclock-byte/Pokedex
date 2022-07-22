@@ -34,6 +34,7 @@ export const HomeScreen = () => {
                 ...styles.globatMargin,
                 top: top + 20,
                 marginBottom: top + 20,
+                paddingBottom: 10,
               }}
             >
               Pokedex
